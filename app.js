@@ -45,3 +45,55 @@ function managerData() {
             lesserEmployeeData();
         });
     }
+
+    function lesserEmployeeData() {
+        inquirer.prompt([
+            {
+                type: "list",
+                message: "What is the employee's role?",
+                name: "employeeRole",
+                choices: ["Intern", "Engineer"]
+            },
+            {
+                type: "input",
+                message: "What is employee name?",
+                name: "employeeName"
+            },
+            {
+                type: "input",
+                message: "What is employee's ID?",
+                name: "employeeId"
+            },
+            {
+                type: "input",
+                message: "What is employee email?",
+                name: "employeeEmail"
+            },
+            {
+                type: "input",
+                message: "What is the Engineer's Github?",
+                name: "github",
+                when: (userInput) => userInput.employeeRole === "Engineer"
+            },
+            {
+                type: "input",
+                message: "What's the Intern's school?",
+                name: "school",
+                when: (userInput) => userInput.employeeRole === "Intern"
+            },
+            {
+                type: "confirm",
+                name: "newEmployee",
+                message: "Would you like to add another team member?"
+            }
+        ]).then(answers => {
+            if (answers.employeeRole === "Intern") {
+                const employee = new Intern(answers.employeeName, answers.employeeId, answers.employeeEmail, answers.school);
+                teamMembers.push(employee);
+            } else if (answers.employeeRole === "Engineer") {
+                
+                teamMembers.push(new Engineer(answers.employeeName, answers.employeeId, answers.employeeEmail, answers.github));
+            }
+            if (answers.newEmployee === true) {
+                lesserEmployeeData();
+            } else {
