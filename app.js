@@ -84,7 +84,7 @@ function managerData() {
             {
                 type: "confirm",
                 name: "newEmployee",
-                message: "Would you like to add another team member?"
+                message: "Would you like to add another member?"
             }
         ]).then(answers => {
             if (answers.employeeRole === "Intern") {
@@ -97,3 +97,13 @@ function managerData() {
             if (answers.newEmployee === true) {
                 lesserEmployeeData();
             } else {
+                var main = fs.readFileSync("./generateHTML/index.html");
+                
+
+            console.log("The html has been generated in output");
+               
+        }
+    });
+};
+
+managerData();
