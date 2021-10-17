@@ -42,11 +42,11 @@ function managerData() {
             manager = new Manager(managerAnswers.managerName, managerAnswers.managerID, managerAnswers.managerEmail, managerAnswers.officeNumber);
             teamTitle = managerAnswers.teamTitle;
             console.log("Now we will ask for employee information.")
-            lesserEmployeeData();
+            otherEmployeeData();
         });
     }
 
-    function lesserEmployeeData() {
+    function otherEmployeeData() {
         inquirer.prompt([
             {
                 type: "list",
@@ -95,7 +95,7 @@ function managerData() {
                 teamMembers.push(new Engineer(answers.employeeName, answers.employeeId, answers.employeeEmail, answers.github));
             }
             if (answers.newEmployee === true) {
-                lesserEmployeeData();
+                otherEmployeeData();
             } else {
                 var main = fs.readFileSync("./generateHTML/index.html");
                 
