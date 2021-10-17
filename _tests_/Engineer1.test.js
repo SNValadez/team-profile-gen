@@ -17,3 +17,9 @@ test("Can you set an  email for engineer?", () => {
 
     expect(engineer.email).toBe("busybeeengineer1@gmail.com");
 })
+
+test("Can you set a github for engineer?", () => {
+    const engineer = new Engineer("Eureka", 2, "busybeeengineer1@gmail.com", "Github User");
+
+    expect(engineer.github).toBe("Github User");
+})
