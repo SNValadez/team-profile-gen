@@ -3,7 +3,7 @@ const fs = require("fs");
 const inquirer = require("inquirer");
 
 let manager; 
-let teamTitle;
+let teamName;
 
 const Employee = require("./lib/Employee1");
 const Engineer = require("./lib/Engineer1");
@@ -16,32 +16,32 @@ function managerData() {
     inquirer.prompt([
         {   // Fill html with teamName.
             type: "input",
-            message: "What is the name of this team/project?",
-            name: "teamTitle"
+            message: "What is the name of this team?",
+            name: "teamName"
         },
         {   // There is only 1 manager for a team.
             type: "input",
             message: "Who is the manager?",
             name: "managerName"
         },
-        {   // Employee ID.
+        {   
             type: "input",
             message: "What is manager ID?",
             name: "managerID"
         },
-        {   // Employee Email.
+        {  
             type: "input",
             message: "What is manager email?",
             name: "managerEmail"
         },
         {
             type: "input",
-            message: "What is the manager's office number?",
+            message: "What's the manager's office number?",
             name: "officeNumber"
         }]).then(managerAnswers => {
             manager = new Manager(managerAnswers.managerName, managerAnswers.managerID, managerAnswers.managerEmail, managerAnswers.officeNumber);
-            teamTitle = managerAnswers.teamTitle;
-            console.log("Now we will ask for employee information.")
+            teamName = managerAnswers.teamName;
+            console.log("Other employee information needed.")
             otherEmployeeData();
         });
     }
@@ -50,28 +50,28 @@ function managerData() {
         inquirer.prompt([
             {
                 type: "list",
-                message: "What is the employee's role?",
+                message: "What's the employee's role?",
                 name: "employeeRole",
                 choices: ["Intern", "Engineer"]
             },
             {
                 type: "input",
-                message: "What is employee name?",
+                message: "What's employee name?",
                 name: "employeeName"
             },
             {
                 type: "input",
-                message: "What is employee's ID?",
+                message: "What's employee's ID?",
                 name: "employeeId"
             },
             {
                 type: "input",
-                message: "What is employee email?",
+                message: "What's employee email?",
                 name: "employeeEmail"
             },
             {
                 type: "input",
-                message: "What is the Engineer's Github?",
+                message: "What's the Engineer's Github?",
                 name: "github",
                 when: (userInput) => userInput.employeeRole === "Engineer"
             },
@@ -84,7 +84,7 @@ function managerData() {
             {
                 type: "confirm",
                 name: "newEmployee",
-                message: "Would you like to add another member?"
+                message: "Would you like to add more team members?"
             }
         ]).then(answers => {
             if (answers.employeeRole === "Intern") {
@@ -100,7 +100,7 @@ function managerData() {
                 var main = fs.readFileSync("./generateHTML/index.html");
                 
 
-            console.log("The html has been generated in output");
+            console.log("The html has been generated.");
                
         }
     });
